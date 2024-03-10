@@ -167,11 +167,7 @@ class SnakeGame {
 
   stop() {
     clearInterval(this._timer);
-    this.state = {
-      running: false,
-      score: 0,
-      player: this._defaultState.player,
-    };
+    this.state = this._defaultState;
 
     this.swipeDetector.stop();
     this.emit("stop", this.state);
@@ -350,7 +346,10 @@ class SnakeGame {
 
     this.state = { difficulty: rate };
 
-    this._timer = setInterval(() => this.tick(), 1000 - rate * 50);
+    this._timer = setInterval(
+      () => this.tick(),
+      Math.max(650, 1000 - rate * 15)
+    );
 
     this.emit("setTickRate", this.state);
   }
@@ -380,9 +379,23 @@ class SnakeGame {
       this.emit("bestScore", this.settings);
     }
 
-    // Update the tick rate every 5 points
-    if (this.state.score % 5 == 0) {
-      this.setTickRate(this.state.score);
+    // Increase the difficulty
+    switch (this.state.score) {
+      case 15:
+        this.setTickRate(10);
+        break;
+      case 30:
+        this.setTickRate(15);
+        break;
+      case 50:
+        this.setTickRate(30);
+        break;
+      case 70:
+        this.setTickRate(50);
+        break;
+      case 100:
+        this.setTickRate(65);
+        break;
     }
 
     this.emit("eat", this.state);
@@ -472,6 +485,10 @@ class SnakeGameDomHandler {
       </div>
     `;
 
+    if (restart) {
+      this._container.querySelector("#snake-game-score").innerText =
+        this._game.state.score;
+    }
     this._container.querySelector("#snake-game-best-score").innerText =
       this._game.settings.bestScore;
 
