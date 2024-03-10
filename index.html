@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Snake by Jaco Faber</title>
+    <meta
+      name="description"
+      content="Experience the classic Snake game right here in your browser."
+    />
+    <link rel="stylesheet" href="snake.css" />
+  </head>
+  <body>
+    <div class="menu">
+      <button id="how-to-play">How to play</button>
+      <button id="change-colors">Colors</button>
+    </div>
+    <div id="snake"></div>
+
+    <div class="footer-menu">
+        <a href="https://www.linkedin.com/in/jacofabersa/" target="_blank"
+          >Built by Jaco Faber</a
+        >
+        <span>&copy; 2024</span>
+      </div>
+
+    <div class="how-to-play">
+      <div>
+        <h2>Movement</h2>
+        <p>
+          To move the snake swipe anywhere on the board in the direction you
+          want the snake to move.
+        </p>
+        <p>
+          You can also use your keyboard's arrow keys or w, a, s, d keys to move
+          the snake in the desired direction.
+        </p>
+
+        <h2>Objective</h2>
+        <p>
+          Collect as many apples as you can without running into the walls or
+          the snake's own body.
+        </p>
+        <p>
+          Every apple you collect will increase the snake's length and the score
+          by one.
+        </p>
+        <p>Your best score will be saved for the browser you are playing on.</p>
+
+        <h2>Difficulty</h2>
+        <p>As you collect more apples the snake will move faster.</p>
+
+        <h2>Game Over</h2>
+        <p>
+          When the snake runs into the walls or its own body the game will end.
+        </p>
+
+        <h2>Restarting</h2>
+        <p>
+          To Restart the game click the pause button and then click Restart.
+        </p>
+        <button id="close-how-to-play">Close</button>
+      </div>
+    </div>
+    
+    <script src="snake.js"></script>
+  </body>
+</html>

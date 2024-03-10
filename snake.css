@@ -1,0 +1,129 @@
+:root {
+  --snake-game-menu: #08002b;
+  --snake-game-board: #000000;
+  --snake-game-snake: #ffffff;
+  --snake-game-food: limegreen;
+  --snake-game-text: #ffffff;
+}
+
+html,
+body {
+  min-height: 100%;
+  background: var(--snake-game-menu);
+}
+
+body {
+  padding: 0;
+  margin: 0;
+  position: fixed;
+  inset: 0;
+  display: grid;
+  place-content: center;
+  color: var(--snake-game-text);
+  font-family: "Courier New", Courier, monospace;
+}
+
+.how-to-play {
+  display: none;
+  position: absolute;
+  background: var(--snake-game-menu);
+  inset: 0;
+  text-align: center;
+  place-content: center;
+  overflow: auto;
+  height: 100%;
+  padding: 20px;
+}
+
+.menu span,
+.footer-menu span,
+button,
+a {
+  background: none;
+  color: var(--snake-game-text);
+  font-family: "Courier New", Courier, monospace;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 0px;
+  cursor: pointer;
+  font-size: 1.1rem;
+  margin: 10px;
+  text-decoration: underline;
+}
+
+.menu,
+.footer-menu {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  font-family: "Courier New", Courier, monospace;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.footer-menu {
+  top: unset;
+  bottom: 0;
+}
+
+.menu span,
+.menu button,
+.menu a,
+.footer-menu span,
+.footer-menu button,
+.footer-menu a {
+  font-size: 0.8rem;
+}
+
+.footer-menu span,
+.menu span {
+  pointer-events: none;
+  text-decoration: none;
+}
+
+#snake {
+  background: var(--snake-game-menu);
+  width: 400px;
+  height: 400px;
+  margin: auto;
+  font-family: "Courier New", Courier, monospace;
+  color: var(--snake-game-text);
+  display: grid;
+  place-items: center;
+  padding: 0;
+  margin: auto;
+  touch-action: none;
+}
+
+@media (max-width: 400px) {
+  #snake {
+    width: 350px;
+    height: 350px;
+  }
+}
+
+#snake .snake-intro {
+  text-align: center;
+}
+
+#snake #snake-canvas {
+  background: var(--snake-game-board);
+  width: 100%;
+  height: 100%;
+}
+
+#snake .snake-game-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 30px;
+  width: 100%;
+}
+
+#snake .snake-game-controls:first-child {
+  padding-left: 10px;
+}
