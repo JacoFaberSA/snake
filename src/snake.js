@@ -1,3 +1,5 @@
+import "./snake.scss";
+
 class SnakeGame {
   static _instance = null;
 
@@ -341,6 +343,7 @@ class SnakeGame {
     }
   }
 
+  // Set the game speed. Max is 100 (equates 500ms)
   setTickRate(rate = 5) {
     clearInterval(this._timer);
 
@@ -348,7 +351,7 @@ class SnakeGame {
 
     this._timer = setInterval(
       () => this.tick(),
-      Math.max(650, 1000 - rate * 15)
+      Math.max(500, 1000 - rate * 5)
     );
 
     this.emit("setTickRate", this.state);
@@ -379,24 +382,8 @@ class SnakeGame {
       this.emit("bestScore", this.settings);
     }
 
-    // Increase the difficulty
-    switch (this.state.score) {
-      case 15:
-        this.setTickRate(10);
-        break;
-      case 30:
-        this.setTickRate(15);
-        break;
-      case 50:
-        this.setTickRate(30);
-        break;
-      case 70:
-        this.setTickRate(50);
-        break;
-      case 100:
-        this.setTickRate(65);
-        break;
-    }
+    // Increase the difficulty every 5 points
+    this.setTickRate(Math.floor(this.state.score / 5) * 5);
 
     this.emit("eat", this.state);
   }
@@ -430,6 +417,7 @@ class SnakeGame {
   }
 
   emit(event, data) {
+    console.debug("Event:", event, data);
     this.eventHandler.emit(event, data);
   }
 }
@@ -680,90 +668,8 @@ class SnakeGameSwipeDetector {
   }
 }
 
-(function () {
-  const game = SnakeGame.instance;
-
-  // If the window looses focus then pause the game
-  window.addEventListener("blur", () => {
-    game.pause();
-  });
-
-  // Handle the how to play button
-  window.addEventListener("click", (e) => {
-    if (e.target.matches("#how-to-play")) {
-      if (game.state.running) {
-        game.pause();
-      }
-
-      document.querySelector(".how-to-play").style.display = "grid";
-    }
-
-    if (e.target.matches("#close-how-to-play")) {
-      document.querySelector(".how-to-play").style.display = "none";
-    }
-
-    if (e.target.matches("#change-colors")) {
-      const colorPalettes = [
-        {
-          menu: "rgb(73, 46, 135)",
-          board: "rgb(10, 29, 86)",
-          snake: "rgb(55, 181, 182)",
-          food: "rgb(242, 245, 151)",
-          text: "rgb(255, 255, 255)",
-        },
-        {
-          menu: "rgb(11, 96, 176)",
-          board: "rgb(0, 0, 0)",
-          snake: "rgb(64, 162, 216)",
-          food: "rgb(240, 237, 207)",
-          text: "rgb(255, 255, 255)",
-        },
-        {
-          menu: "rgb(255, 255, 255)",
-          board: "rgb(0, 0, 0)",
-          snake: "rgb(255, 0, 0)",
-          food: "rgb(0, 255, 0)",
-          text: "rgb(0, 0, 0)",
-        },
-        {
-          menu: "rgb(117, 14, 33)",
-          board: "rgb(25, 25, 25)",
-          snake: "rgb(190, 215, 84)",
-          food: "rgb(227, 101, 29)",
-          text: "rgb(255, 255, 255)",
-        },
-        {
-          menu: "rgb(191, 207, 231)",
-          board: "rgb(248, 237, 255)",
-          snake: "rgb(61, 59, 64)",
-          food: "rgb(82, 92, 235)",
-          text: "rgb(61, 59, 64)",
-        },
-        {
-          menu: "rgb(69, 71, 75)",
-          board: "rgb(245, 247, 248)",
-          snake: "rgb(73, 94, 87)",
-          food: "rgb(244, 206, 20)",
-          text: "rgb(255, 255, 255)",
-        },
-      ];
-
-      const currentColorPalette = game.settings.colorPallette;
-      const currentColorPaletteIndex = colorPalettes.findIndex(
-        (palette) =>
-          palette.menu == currentColorPalette.menu &&
-          palette.board == currentColorPalette.board &&
-          palette.snake == currentColorPalette.snake &&
-          palette.food == currentColorPalette.food &&
-          palette.text == currentColorPalette.text
-      );
-
-      const nextColorPaletteIndex =
-        currentColorPaletteIndex + 1 >= colorPalettes.length
-          ? 0
-          : currentColorPaletteIndex + 1;
-
-      game.setColorPallette(colorPalettes[nextColorPaletteIndex]);
-    }
-  });
-})();
+if (typeof module !== "undefined" && module.exports) {
+  module.exports = SnakeGame;
+} else {
+  window.SnakeGame = SnakeGame;
+}

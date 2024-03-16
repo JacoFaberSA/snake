@@ -1,0 +1,32 @@
+{
+  "name": "snake",
+  "displayName": "Snake by Jaco Faber",
+  "version": "1.0.3",
+  "description": "Simple snake game",
+  "main": "src/snake.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack --mode=production --progress",
+    "watch": "webpack --watch --mode=development --progress"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JacoFaberSA/snake.git"
+  },
+  "author": "@JacoFaberSA",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JacoFaberSA/snake/issues"
+  },
+  "homepage": "https://github.com/JacoFaberSA/snake#readme",
+  "devDependencies": {
+    "css-loader": "^6.10.0",
+    "html-webpack-plugin": "^5.6.0",
+    "mini-css-extract-plugin": "^2.8.1",
+    "sass": "^1.72.0",
+    "sass-loader": "^14.1.1",
+    "style-loader": "^3.3.4",
+    "webpack": "^5.90.3",
+    "webpack-cli": "^5.1.4"
+  }
+}

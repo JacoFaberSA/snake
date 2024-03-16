@@ -1,3 +1,6 @@
+/*!*********************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./src/snake.scss ***!
+  \*********************************************************************************************************/
 :root {
   --snake-game-menu: #08002b;
   --snake-game-board: #000000;
@@ -25,14 +28,17 @@ body {
 
 .how-to-play {
   display: none;
-  position: absolute;
+  position: fixed;
   background: var(--snake-game-menu);
   inset: 0;
   text-align: center;
-  place-content: center;
   overflow: auto;
-  height: 100%;
+}
+.how-to-play > div {
   padding: 20px;
+}
+.how-to-play h2 {
+  margin: 30px 0;
 }
 
 .menu span,
@@ -78,9 +84,8 @@ a {
 .footer-menu a {
   font-size: 0.8rem;
 }
-
-.footer-menu span,
-.menu span {
+.menu span,
+.footer-menu span {
   pointer-events: none;
   text-decoration: none;
 }
@@ -98,24 +103,20 @@ a {
   margin: auto;
   touch-action: none;
 }
-
 @media (max-width: 400px) {
   #snake {
     width: 350px;
     height: 350px;
   }
 }
-
-#snake .snake-intro {
-  text-align: center;
-}
-
-#snake #snake-canvas {
+#snake-canvas {
   background: var(--snake-game-board);
   width: 100%;
   height: 100%;
 }
-
+#snake .snake-intro {
+  text-align: center;
+}
 #snake .snake-game-controls {
   display: flex;
   align-items: center;
@@ -123,7 +124,6 @@ a {
   height: 30px;
   width: 100%;
 }
-
 #snake .snake-game-controls:first-child {
   padding-left: 10px;
 }
